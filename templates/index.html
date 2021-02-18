@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.1/socket.io.min.js"></script>
+    <script>
+      const socket = io.connect("http://127.0.0.1:5000");
+
+      socket.on('ChangeText', function(Text) {
+        $("input").val(Text);
+      });
+
+      let ChangeValues = () => {
+        var Text = $("input").val();
+        console.log(Text)
+
+        socket.emit("Change", Text)
+      }
+      
+      $(document).ready(function() {
+        $("input").on('change', function() {
+          console.log("Hello")
+          ChangeValues();
+        });
+
+      });
+    </script>
+    <title></title>
+  </head>
+  <body>
+    <input type="textarea">
+  </body>
+</html>
